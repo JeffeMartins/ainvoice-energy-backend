@@ -1,6 +1,6 @@
 # API de Faturas de Energia
 
-Esta API foi desenvolvida para gerenciar faturas de energia elétrica, incluindo funcionalidades de upload de PDFs, consulta de dados específicos e visualização de PDFs armazenados. O projeto foi construído utilizando **Clean Architecture**, **TypeScript**, **Express**, **PostgreSQL** (via Prisma ORM) e **Docker Compose**.
+Esta API foi desenvolvida para gerenciar faturas de energia elétrica, incluindo funcionalidades de upload de PDFs, consulta de dados específicos e visualização de PDFs armazenados. O projeto foi construído utilizando **Clean Architecture**, **TypeScript**, **Express**, **PostgreSQL**, **Node 20** (via Prisma ORM) e **Docker Compose**.
 
 ## Índice
 
