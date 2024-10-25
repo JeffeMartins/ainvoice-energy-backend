@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "typeRoots": [
+      "./src/@types",
+      "./node_modules/@types"
+    ],
+    "target": "es2020",      // Target de compatibilidade moderno
+    "module": "commonjs",
+    "outDir": "./dist",      // Diretório de saída
+    "strict": true,          // Habilita verificações estritas
+    "esModuleInterop": true, // Facilita a interoperabilidade entre ES Modules e CommonJS
+    "skipLibCheck": true,    // Ignora verificação de tipos de bibliotecas
+    "moduleResolution": "node",  // Resolve módulos no estilo do Node.js
+    "sourceMap": true,       // Gera arquivos source map
+    "forceConsistentCasingInFileNames": true  // Consistência no uso de maiúsculas e minúsculas
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]}

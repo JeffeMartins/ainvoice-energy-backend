@@ -1,0 +1,46 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        BigInt      @id @default(autoincrement())
+  name      String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Client {
+  numberClient      BigInt           @id @default(autoincrement()) // ID autoincremental
+  name              String
+  address           String
+  additionalAddress String?
+  accountData       AccountData[] // Relacionamento com account_data
+}
+
+model AccountData {
+  id                               Int    @id @default(autoincrement()) // ID autoincremental para a tabela account_data
+  numberClient                     BigInt // Chave estrangeira relacionada à tabela client
+  referenceMonth                   String
+  electricalEnergyQuantity         Int
+  electricalEnergyValue            Float
+  energySCEEEWithoutICMSQuantity   Int
+  energySCEEEWithoutICMSValue      Float
+  compensatedEnergyGDQuantity      Int
+  compensatedEnergyGDValue         Float
+  contribMunicipalPublicLightValue Float
+  urlAccount                       String
+
+  client Client @relation(fields: [numberClient], references: [numberClient]) // Relacionamento com Client
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

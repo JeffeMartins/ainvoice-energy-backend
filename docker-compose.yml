@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  app:
+    build: . # Use o Dockerfile no diretório atual
+    container_name: energy-billing-backend
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
+    command: sh -c "npm run migrate && npm run dev" # Rodar migrações e iniciar a aplicação
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/energy_db
+      NODE_ENV: development
+      URL_BASE: http://localhost:3000
+      JWT_SECRET: my_super_secret_key
+      JWT_EXPIRES_IN: 1h
+      BCRYPT_SALT_ROUNDS: 10
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: energy_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+
+networks:
+  app-network:
+    driver: bridge
